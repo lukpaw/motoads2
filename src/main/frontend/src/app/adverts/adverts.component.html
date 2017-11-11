@@ -1,0 +1,65 @@
+<div class="ui-g">
+
+  <div class="ui-g-2">
+    <p-panelMenu [model]="brandItems" [style]="{'width':'250px'}"></p-panelMenu>
+  </div>
+
+
+  <div claas="ui-g-10">
+
+    <div class="ui-g-12">
+      <div class="ui-g-10">
+        <p-dropdown [options]="countryItems" [(ngModel)]="selectedCountry"
+                    (onChange)="onChangeCountry()"></p-dropdown>
+        &nbsp;&nbsp;
+        <p-dropdown [options]="regionItems" [(ngModel)]="selectedRegion"
+                    (onChange)="onChangeRegion()"></p-dropdown>
+        &nbsp;&nbsp;
+        <p-inputMask [(ngModel)]="selectedYearFrom" mask="9999" placeholder="Year from" size="6" maxlength="4"
+                     (change)="onChangeYearFrom()"></p-inputMask>
+        &nbsp;&nbsp;
+        <p-inputMask [(ngModel)]="selectedYearTo" mask="9999" placeholder="Year to" size="6" maxlength="4"
+                     (change)="onChangeYearTo()"></p-inputMask>
+      </div>
+      <div class="ui-g-2">
+        <p-dropdown [options]="sortBy" [(ngModel)]="selectedSortBy"
+                    (onChange)="onChangeSortBy()"></p-dropdown>
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <button *ngIf="anyFilterOrSort()" pButton type="button" (click)="onclickClear()" label="Clear all" icon="fa-close"></button>
+      <span *ngIf="anyFilter()" class="ui-widget">Filter:</span>
+      <p-message *ngIf="selectedModel" severity="info" text="{{selectedModel.name}}"></p-message>
+      <p-message *ngIf="selectedCountry" severity="info" text="{{selectedCountry.name}}"></p-message>
+      <p-message *ngIf="selectedRegion" severity="info" text="{{selectedRegion.name}}"></p-message>
+      <p-message *ngIf="selectedYearFrom" severity="info" text="{{selectedYearFrom}}"></p-message>
+      <p-message *ngIf="selectedYearTo" severity="info" text="{{selectedYearTo}}"></p-message>
+      <span *ngIf="selectedSortBy" class="ui-widget">Sort by:</span>
+      <p-message *ngIf="selectedSortBy" severity="info" text="{{selectedSortBy.name}}"></p-message>
+    </div>
+
+    <div class="ui-g-12">
+      <p-dataList [value]="adverts" [paginator]="true" [rows]="5">
+        <p-header>
+          Adverts
+        </p-header>
+        <ng-template let-advert pTemplate="item">
+          <div class="ui-g">
+            <div class="ui-g-3">
+              <img src="{{advert.imageUrl}}">
+            </div>
+            <div class="ui-g-9">
+              <div class="ui-g-12">{{advert.brandName}} {{advert.modelName}}</div>
+              <div class="ui-g-12">Year: {{advert.year}}</div>
+              <div class="ui-g-12">Price: {{advert.price}} $</div>
+              <div class="ui-g-12">Location: {{advert.countryName}}, {{advert.regionName}}</div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataList>
+    </div>
+
+  </div>
+
+</div>
