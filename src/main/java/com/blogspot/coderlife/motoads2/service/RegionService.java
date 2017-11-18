@@ -20,7 +20,7 @@ public class RegionService {
     this.regionRepository = regionRepository;
   }
 
-  public List<RegionDTO> getRegions(Long countryId) {
+  public List<RegionDTO> getRegionsByCountryId(Long countryId) {
     List<Region> regions = regionRepository.findAllByCountry_Id(countryId);
     return regions
         .stream()

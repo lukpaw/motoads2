@@ -7,6 +7,7 @@ import {Brand} from './shared/brand';
 import {Country} from './shared/country';
 import {Region} from './shared/region';
 import {environment} from "../environments/environment";
+import {Model} from "./shared/model";
 
 @Injectable()
 export class AppService {
@@ -16,6 +17,11 @@ export class AppService {
 
   getBrands(): Observable<Brand[]> {
     return this.http.get(environment.apiUrl + '/api/brand/').map(res => res.json());
+  }
+
+  // TODO brandId not best solution in url in such way
+  getModels(brandId: number): Observable<Model[]> {
+    return this.http.get(environment.apiUrl + '/api/model/' + brandId).map(res => res.json());
   }
 
   getCountries(): Observable<Country[]> {

@@ -1,3 +1,107 @@
-<p>
-  Not implemented yet!
-</p>
+<div class="container">
+  <div class="row justify-content-start">
+
+    <div class="col-12">
+      <div class="ui-widget form-title">New advert</div>
+    </div>
+
+    <div class="col-12">
+      <form (ngSubmit)="onSubmit()" #advertForm="ngForm">
+        <div class="row form-field-line">
+          <div class="col-2">
+            <label for="brandId">Brand</label>
+          </div>
+          <div class="col-10">
+            <p-dropdown [options]="brandItems" id="brandId" name="brandId" [(ngModel)]="advert.brandId" required
+                        (onChange)="onChangeBrand()" #brandId="ngModel"></p-dropdown>
+            <div [hidden]="brandId.valid || brandId.pristine"
+                 class="alert alert-danger">
+              Brand is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-field-line">
+          <div class="col-2">
+            <label for="modelId">Model</label>
+          </div>
+          <div class="col-10">
+            <p-dropdown [options]="modelItems" id="modelId" name="modelId" [(ngModel)]="advert.modelId" required
+                        #modelId="ngModel"></p-dropdown>
+            <div [hidden]="modelId.valid || modelId.pristine"
+                 class="alert alert-danger">
+              Model is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-field-line">
+          <div class="col-2">
+            <label for="year">Year</label>
+          </div>
+          <div class="col-10">
+            <p-inputMask id="year" name="year" [(ngModel)]="advert.year" mask="9999" placeholder="Year" size="6" maxlength="4" required
+                          #year="ngModel"></p-inputMask>
+            <div [hidden]="year.valid || year.pristine"
+                 class="alert alert-danger">
+              Year is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-field-line">
+          <div class="col-2">
+            <label for="price">Price ($)</label>
+          </div>
+          <div class="col-10">
+            <p-inputMask id="price" name="price" [(ngModel)]="advert.price" mask="?9999999" placeholder="Price" size="10" maxlength="7" required
+                         #price="ngModel"></p-inputMask>
+            <div [hidden]="price.valid || price.pristine"
+                 class="alert alert-danger">
+              Price is required
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-2 form-field-line">
+            <label for="countryId">Country</label>
+          </div>
+          <div class="col-10">
+            <p-dropdown [options]="countryItems" id="countryId" name="countryId" [(ngModel)]="advert.countryId" required
+                        (onChange)="onChangeCountry()" #countryId="ngModel"></p-dropdown>
+            <div [hidden]="countryId.valid || countryId.pristine"
+                 class="alert alert-danger">
+              Country is required
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row form-field-line">
+          <div class="col-2">
+            <label for="regionId">Region</label>
+          </div>
+          <div class="col-10">
+            <p-dropdown [options]="regionItems" id="regionId" name="regionId" [(ngModel)]="advert.regionId" required
+                        #regionId="ngModel"></p-dropdown>
+            <div [hidden]="regionId.valid || regionId.pristine"
+                 class="alert alert-danger">
+              Region is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-button-line">
+        <button pButton type="button" (click)="save()" label="Save"></button>
+        <button pButton type="button" (click)="advertForm.reset()" label="Reset"></button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="notice">Notice! Images upload not supported yet.</div>
+
+  </div>
+</div>

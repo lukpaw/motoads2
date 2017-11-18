@@ -20,6 +20,6 @@ public class RegionController {
   @CrossOrigin(origins = "*")
   @GetMapping("/{countryId}")
   public Collection<RegionDTO> getRegionsByCountryId(@PathVariable Long countryId) {
-    return regionService.getRegions(countryId);
+    return regionService.getRegionsByCountryId(countryId);
   }
 }

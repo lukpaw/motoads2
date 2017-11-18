@@ -52,7 +52,6 @@ export class AdvertsComponent implements OnInit {
     );
 
     this.initDefaultCountryItems();
-
     this.appService.getCountries().subscribe(
       countries => {
 
