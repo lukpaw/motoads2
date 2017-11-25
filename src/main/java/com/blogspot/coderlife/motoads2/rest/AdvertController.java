@@ -6,6 +6,8 @@ import com.blogspot.coderlife.motoads2.service.AdvertService;
 import com.blogspot.coderlife.motoads2.service.dto.AdvertDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -14,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class AdvertController {
   private final AdvertService advertService;
 
@@ -24,13 +26,21 @@ public class AdvertController {
   }
 
   @CrossOrigin(origins = "*")
-  @GetMapping("/advert/")
+  @RequestMapping(value = "/api/advert/", method = RequestMethod.GET)
   public Collection<AdvertDTO> getAdverts() {
     return advertService.getAdverts();
   }
 
   @CrossOrigin(origins = "*")
-  @GetMapping("/advertsearch")
+  @RequestMapping(value = "/api/advert/", method = RequestMethod.POST)
+  public ResponseEntity<String> add(@RequestBody AdvertDTO newAdvertDTO) {
+    advertService.addAdvert(newAdvertDTO);
+    // TODO Success is maybe not enough
+    return new ResponseEntity<>("Success", HttpStatus.CREATED);
+  }
+
+  @CrossOrigin(origins = "*")
+  @RequestMapping(value = "/api/advertsearch")
   @ResponseBody
   public List<AdvertDTO> search(@RequestParam(value = "attrs") String search) {
     AdvertSpecificationsBuilder builder = new AdvertSpecificationsBuilder();

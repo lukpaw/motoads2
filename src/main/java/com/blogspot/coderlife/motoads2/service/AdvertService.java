@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class AdvertService {
 
+  //private static final Logger log = LogManager.getLogger(AdvertService.class);
   private final AdvertRepository advertRepository;
 
   @Autowired
@@ -27,6 +28,12 @@ public class AdvertService {
         .stream()
         .map(AdvertDTOMapper::advertToAdvertDTO)
         .collect(Collectors.toList());
+  }
+
+  public void addAdvert(AdvertDTO newAdvertDTO) {
+    Advert newAdvert = AdvertDTOMapper.advertDTOToAdvert(newAdvertDTO);
+    advertRepository.save(newAdvert);
+    // TODO Maybe return added advert
   }
 
   public List<AdvertDTO> getAdverts(Specification<Advert> spec) {

@@ -14,6 +14,7 @@ export class AddAdvertComponent implements OnInit {
   countryItems: SelectItem[] = [];
   regionItems: SelectItem[] = [];
   advert: Advert = new Advert();
+  advertAddedRes: String = null;
 
   constructor(private appService: AppService) {
   }
@@ -100,7 +101,9 @@ export class AddAdvertComponent implements OnInit {
 
   save() {
     console.log(JSON.stringify(this.advert));
-    // TODO Save in backend
+    this.appService.addAdvert(this.advert).subscribe(advert => console.log("Added"));
+    this.advertAddedRes = "Advert added successfully";
+    this.advert = new Advert();
   }
 
 }

@@ -1,6 +1,8 @@
 <div class="container">
   <div class="row justify-content-start">
 
+    <div *ngIf="advertAddedRes" class="col-12 msg">{{advertAddedRes}}</div>
+
     <div class="col-12">
       <div class="ui-widget form-title">New advert</div>
     </div>
@@ -94,14 +96,14 @@
         </div>
 
         <div class="row form-button-line">
-        <button pButton type="button" (click)="save()" label="Save"></button>
+        <button pButton type="button" (click)="save(); advertForm.reset()" label="Save"></button>
         <button pButton type="button" (click)="advertForm.reset()" label="Reset"></button>
         </div>
 
       </form>
     </div>
 
-    <div class="notice">Notice! Images upload not supported yet.</div>
+    <div  class="col-12 notice">Notice! Images upload not supported yet.</div>
 
   </div>
 </div>
