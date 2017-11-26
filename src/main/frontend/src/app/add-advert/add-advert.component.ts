@@ -99,11 +99,15 @@ export class AddAdvertComponent implements OnInit {
     }
   }
 
-  save() {
+  newAdvert() {
+    this.advert = new Advert();
+  }
+
+  onSubmit() {
     console.log(JSON.stringify(this.advert));
     this.appService.addAdvert(this.advert).subscribe(advert => console.log("Added"));
     this.advertAddedRes = "Advert added successfully";
-    this.advert = new Advert();
+    this.newAdvert();
   }
 
 }

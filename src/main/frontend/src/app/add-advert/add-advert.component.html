@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-12">
-      <form (ngSubmit)="onSubmit()" #advertForm="ngForm">
+      <form (ngSubmit)="onSubmit(); advertForm.reset()" #advertForm="ngForm">
         <div class="row form-field-line">
           <div class="col-2">
             <label for="brandId">Brand</label>
@@ -43,7 +43,7 @@
           </div>
           <div class="col-10">
             <p-inputMask id="year" name="year" [(ngModel)]="advert.year" mask="9999" placeholder="Year" size="6" maxlength="4" required
-                          #year="ngModel"></p-inputMask>
+                         #year="ngModel"></p-inputMask>
             <div [hidden]="year.valid || year.pristine"
                  class="alert alert-danger">
               Year is required
@@ -96,14 +96,14 @@
         </div>
 
         <div class="row form-button-line">
-        <button pButton type="button" (click)="save(); advertForm.reset()" label="Save"></button>
-        <button pButton type="button" (click)="advertForm.reset()" label="Reset"></button>
+          <button type="submit" class="btn btn-success" [disabled]="!advertForm.form.valid">Save</button>&nbsp;
+          <button type="button" class="btn btn-default" (click)="newAdvert(); advertForm.reset()">Reset</button>
         </div>
 
       </form>
     </div>
 
-    <div  class="col-12 notice">Notice! Images upload not supported yet.</div>
+    <div class="col-12 notice">Notice! Images upload not supported yet.</div>
 
   </div>
 </div>
