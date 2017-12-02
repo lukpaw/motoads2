@@ -52,11 +52,14 @@
                 <div class="col-5">
                   <img src="{{advert.imageUrl}}">
                 </div>
-                <div class="col-7">
+                <div class="col-5">
                   {{advert.brandName}} {{advert.modelName}}<br/>
                   Year: {{advert.year}}<br/>
                   Price: {{advert.price}} $<br/>
                   Location: {{advert.countryName}}, {{advert.regionName}}<br/>
+                </div>
+                <div class="col-2">
+                  <a routerLink="/editAdvert/{{advert.id}}">Edit</a>
                 </div>
               </div>
             </ng-template>

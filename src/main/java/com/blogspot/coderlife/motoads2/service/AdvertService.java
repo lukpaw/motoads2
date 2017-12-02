@@ -30,10 +30,21 @@ public class AdvertService {
         .collect(Collectors.toList());
   }
 
-  public void addAdvert(AdvertDTO newAdvertDTO) {
-    Advert newAdvert = AdvertDTOMapper.advertDTOToAdvert(newAdvertDTO);
-    advertRepository.save(newAdvert);
+  public AdvertDTO getAdvert(Long advertId) {
+    Advert advert = advertRepository.getOne(advertId);
+    return AdvertDTOMapper.advertToAdvertDTO(advert);
+  }
+
+  public void addAdvert(AdvertDTO advertDTO) {
+    Advert advert = AdvertDTOMapper.advertDTOToAdvert(advertDTO);
+    advertRepository.save(advert);
     // TODO Maybe return added advert
+  }
+
+  public void updateAdvert(AdvertDTO advertDTO) {
+    Advert advert = AdvertDTOMapper.advertDTOToAdvert(advertDTO);
+    advertRepository.save(advert);
+    // TODO Maybe return updated advert
   }
 
   public List<AdvertDTO> getAdverts(Specification<Advert> spec) {

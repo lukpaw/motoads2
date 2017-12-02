@@ -38,9 +38,20 @@ export class AppService {
     return this.http.get(environment.apiUrl + '/api/advert/').map(res => res.json());
   }
 
+  getAdvert(advertId: number): Observable<Advert> {
+    return this.http.get(environment.apiUrl + '/api/advert/' + advertId).map(res => res.json());
+  }
+
   addAdvert(advert: Advert) : Observable<String> {
     // TODO Text response is maybe not enough
     return this.http.post(environment.apiUrl + '/api/advert/', advert)
+      .map(res => res.text())
+      .catch(err => err);
+  }
+
+  updateAdvert(advert: Advert) : Observable<String> {
+    // TODO Text response is maybe not enough
+    return this.http.put(environment.apiUrl + '/api/advert/', advert)
       .map(res => res.text())
       .catch(err => err);
   }

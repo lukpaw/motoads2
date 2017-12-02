@@ -16,7 +16,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
-//@RequestMapping("/api")
 public class AdvertController {
   private final AdvertService advertService;
 
@@ -32,9 +31,23 @@ public class AdvertController {
   }
 
   @CrossOrigin(origins = "*")
+  @RequestMapping(value = "/api/advert/{advertId}", method = RequestMethod.GET)
+  public AdvertDTO getAdvert(@PathVariable Long advertId) {
+    return advertService.getAdvert(advertId);
+  }
+
+  @CrossOrigin(origins = "*")
   @RequestMapping(value = "/api/advert/", method = RequestMethod.POST)
-  public ResponseEntity<String> add(@RequestBody AdvertDTO newAdvertDTO) {
+  public ResponseEntity<String> addAdvert(@RequestBody AdvertDTO newAdvertDTO) {
     advertService.addAdvert(newAdvertDTO);
+    // TODO Success is maybe not enough
+    return new ResponseEntity<>("Success", HttpStatus.CREATED);
+  }
+
+  @CrossOrigin(origins = "*")
+  @RequestMapping(value = "/api/advert/", method = RequestMethod.PUT)
+  public ResponseEntity<String> updateAdvert(@RequestBody AdvertDTO newAdvertDTO) {
+    advertService.updateAdvert(newAdvertDTO);
     // TODO Success is maybe not enough
     return new ResponseEntity<>("Success", HttpStatus.CREATED);
   }
